@@ -1,5 +1,6 @@
 import { Address, Chain } from "viem";
-import { ChainId, ChainName, getViemChain } from "./utils/chains";
+import { ChainId, getAppKitChain, getViemChain } from "./utils/chains";
+import { AppKitNetwork } from "@reown/appkit/networks";
 
 export type ContractAddressRegistry = Record<ChainId, Address>;
 
@@ -39,18 +40,18 @@ export const PUB_TOKEN_VOTING_PLUGIN_ADDRESS = {
   [11155111]: "0xED79E70122E06bB036EB6668e772FaCE4566a4cC",
 } as const satisfies ContractAddressRegistry;
 
-const getEnabledChains = (): [Chain, ...Chain[]] => {
+const getEnabledChains = (): [AppKitNetwork, ...AppKitNetwork[]] => {
   if (process.env.NEXT_PUBLIC_ENABLED_CHAIN_IDS?.includes(",")) {
     // multiple chains enabled
     return process.env.NEXT_PUBLIC_ENABLED_CHAIN_IDS.split(",").map((chainId) =>
-      getViemChain(Number(chainId) as ChainId)
-    ) as [Chain, ...Chain[]];
+      getAppKitChain(Number(chainId) as ChainId)
+    ) as [AppKitNetwork, ...AppKitNetwork[]];
   } else {
-    return [getViemChain(Number(process.env.NEXT_PUBLIC_ENABLED_CHAIN_IDS) as ChainId)];
+    return [getAppKitChain(Number(process.env.NEXT_PUBLIC_ENABLED_CHAIN_IDS) as ChainId)];
   }
 };
 export const ENABLED_CHAINS = getEnabledChains();
-export const PREFERRED_CHAIN = getViemChain(Number(process.env.NEXT_PUBLIC_PREFERRED_CHAIN_ID) as ChainId);
+export const PREFERRED_CHAIN = getAppKitChain(Number(process.env.NEXT_PUBLIC_PREFERRED_CHAIN_ID) as ChainId);
 
 export const PUB_IPFS_ENDPOINTS = process.env.NEXT_PUBLIC_IPFS_ENDPOINTS as string;
 
