@@ -50,6 +50,7 @@ const getEnabledChains = (): [Chain, ...Chain[]] => {
   }
 };
 export const ENABLED_CHAINS = getEnabledChains();
+export const PREFERRED_CHAIN = getViemChain(Number(process.env.NEXT_PUBLIC_PREFERRED_CHAIN_ID) as ChainId);
 
 export const PUB_IPFS_ENDPOINTS = process.env.NEXT_PUBLIC_IPFS_ENDPOINTS as string;
 

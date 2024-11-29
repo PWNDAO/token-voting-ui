@@ -1,6 +1,6 @@
 import { PUB_RPC_URL } from "@/constants";
 import { formatHexString } from "@/utils/evm";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { useAppKit } from "@reown/appkit/react";
 import classNames from "classnames";
 import { createClient, http } from "viem";
 import { createConfig, useAccount, useEnsName } from "wagmi";
@@ -19,7 +19,7 @@ const config = createConfig({
 
 // TODO: update with ODS wallet module - [https://linear.app/aragon/issue/RD-198/create-ods-walletmodule]
 const WalletContainer = () => {
-  const { open } = useWeb3Modal();
+  const { open } = useAppKit();
   const { address, isConnected } = useAccount();
 
   const { data: ensName } = useEnsName({
