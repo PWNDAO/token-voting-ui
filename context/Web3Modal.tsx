@@ -1,15 +1,15 @@
 import { http, createConfig } from "wagmi";
-import { injected } from "wagmi/connectors";
 import { walletConnect, coinbaseWallet } from "wagmi/connectors";
 import {
+  ENABLED_CHAINS,
   PUB_APP_DESCRIPTION,
   PUB_APP_NAME,
-  PUB_CHAIN,
   PUB_PROJECT_URL,
   PUB_RPC_URL,
   PUB_WALLET_CONNECT_PROJECT_ID,
   PUB_WALLET_ICON,
 } from "@/constants";
+import { ChainId } from "@/utils/chains";
 
 // wagmi config
 const metadata = {
@@ -20,20 +20,19 @@ const metadata = {
 };
 
 export const config = createConfig({
-  // TODO do we need to have mainnet enabled here?
-  //chains: [PUB_CHAIN, mainnet],
-  chains: [PUB_CHAIN],
+  chains: ENABLED_CHAINS,
+  // TODO do we need to have this enabled?
   ssr: true,
   transports: {
-    [PUB_CHAIN.id]: http(PUB_RPC_URL, { batch: true }),
-    //[mainnet.id]: http(TODO, { batch: true }),
-  },
+    [1]: http(PUB_RPC_URL[1], { batch: true }),
+    [11155111]: http(PUB_RPC_URL[11155111], { batch: true }),
+  } satisfies Record<ChainId, unknown>,
   connectors: [
     walletConnect({
       projectId: PUB_WALLET_CONNECT_PROJECT_ID,
       metadata,
       showQrModal: false,
     }),
-    // coinbaseWallet({ appName: metadata.name, appLogoUrl: metadata.icons[0] }),
+    coinbaseWallet({ appName: metadata.name, appLogoUrl: metadata.icons[0] }),
   ],
 });

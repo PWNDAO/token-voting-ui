@@ -1,23 +1,31 @@
-import { polygon, mainnet, sepolia, holesky, arbitrum, polygonMumbai, Chain } from "@wagmi/core/chains";
+import { config } from "@/context/Web3Modal";
+import { Chain, mainnet, sepolia } from "@wagmi/core/chains";
+import { useChainId } from "wagmi";
+import { getChainId } from "wagmi/actions";
 
-const chainNames = ["mainnet", "polygon", "sepolia", "holesky", "mumbai", "arbitrum"] as const;
-export type ChainName = (typeof chainNames)[number];
+export const ALLOWED_CHAIN_IDS: [1, 11155111] = [1, 11155111];
+export type ChainId = (typeof ALLOWED_CHAIN_IDS)[number];
+export type ChainName = "mainnet" | "sepolia";
 
-export function getChain(chainName: ChainName): Chain {
+export function getViemChain(chainName: ChainId): Chain {
   switch (chainName) {
-    case "mainnet":
+    case 1:
       return mainnet;
-    case "polygon":
-      return polygon;
-    case "arbitrum":
-      return arbitrum;
-    case "sepolia":
+    case 11155111:
       return sepolia;
-    case "holesky":
-      return holesky;
-    case "mumbai":
-      return polygonMumbai;
     default:
       throw new Error("Unknown chain");
   }
+}
+
+export function useChainIdTypesafe() {
+  return useChainId() as ChainId;
+}
+
+export function getChainIdTypesafe() {
+  return getChainId(config) as ChainId;
+}
+
+export function getCurrentViemChain() {
+  return getViemChain(getChainIdTypesafe());
 }
