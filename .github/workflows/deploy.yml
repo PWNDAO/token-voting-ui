@@ -47,7 +47,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Fill env values with secrets
-        uses: Langsdorf/env-replace@v1.0.6
+        uses: Langsdorf/env-replace@v1.0.7
         with:
           file: "env/${{ env.ENV_FILE }}"
           replace-all: |
