@@ -21,7 +21,7 @@ jobs:
             echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
           else
             echo "ENV_FILE=.env.app.development" >> $GITHUB_ENV
-            echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
+            echo "BUILD_COMMAND=bun run build-dev" >> $GITHUB_ENV
           fi
 
       - name: Checkout
