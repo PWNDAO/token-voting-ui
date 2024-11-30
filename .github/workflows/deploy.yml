@@ -71,7 +71,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: pages deploy .output/public --project-name=pwn-voting-ui --branch=${{ env.BRANCH_NAME }} --commit-hash=${{ github.sha }}
+          command: pages deploy out --project-name=pwn-voting-ui --branch=${{ env.BRANCH_NAME }} --commit-hash=${{ github.sha }}
 
       - name: Add comment to PR with deployed URL
         if: github.event_name == 'pull_request'
