@@ -19,13 +19,9 @@ jobs:
           if [ "$BRANCH_NAME" = "master" ]; then
             echo "ENV_FILE=.env.app.production" >> $GITHUB_ENV
             echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
-#            echo "ENABLED_CHAINS=1" >> $GITHUB_ENV
-#            echo "PREFERRED_CHAIN=1" >> $GITHUB_ENV
           else
             echo "ENV_FILE=.env.app.development" >> $GITHUB_ENV
             echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
-#            echo "ENABLED_CHAINS=1,11155111" >> $GITHUB_ENV
-#            echo "PREFERRED_CHAIN=11155111" >> $GITHUB_ENV
           fi
 
       - name: Checkout
@@ -64,8 +60,6 @@ jobs:
             NEXT_PUBLIC_SEPOLIA_RPC_URL=${{ secrets.NEXT_PUBLIC_SEPOLIA_RPC_URL }}
             NEXT_PUBLIC_WEB3_STORAGE_KEY=${{ secrets.NEXT_PUBLIC_WEB3_STORAGE_KEY }}
             NEXT_PUBLIC_ETHERSCAN_API_KEY=${{ secrets.NEXT_PUBLIC_ETHERSCAN_API_KEY }}
-#            NEXT_PUBLIC_ENABLED_CHAIN_IDS=${{ env.ENABLED_CHAINS }}
-#            NEXT_PUBLIC_PREFERRED_CHAIN_ID=${{ env.PREFERRED_CHAIN }}
 
       - name: Build
         run: ${{ env.BUILD_COMMAND }}
