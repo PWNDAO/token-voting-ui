@@ -19,13 +19,13 @@ jobs:
           if [ "$BRANCH_NAME" = "master" ]; then
             echo "ENV_FILE=.env.app.production" >> $GITHUB_ENV
             echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
-            echo "ENABLED_CHAINS=1" >> $GITHUB_ENV
-            echo "PREFERRED_CHAIN=1" >> $GITHUB_ENV
+#            echo "ENABLED_CHAINS=1" >> $GITHUB_ENV
+#            echo "PREFERRED_CHAIN=1" >> $GITHUB_ENV
           else
             echo "ENV_FILE=.env.app.development" >> $GITHUB_ENV
             echo "BUILD_COMMAND=bun run build-prod" >> $GITHUB_ENV
-            echo "ENABLED_CHAINS=1,11155111" >> $GITHUB_ENV
-            echo "PREFERRED_CHAIN=11155111" >> $GITHUB_ENV
+#            echo "ENABLED_CHAINS=1,11155111" >> $GITHUB_ENV
+#            echo "PREFERRED_CHAIN=11155111" >> $GITHUB_ENV
           fi
 
       - name: Checkout
