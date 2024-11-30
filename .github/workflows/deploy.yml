@@ -47,7 +47,7 @@ jobs:
       - name: Fill env values with secrets
         uses: Langsdorf/env-replace@v1.0.6
         with:
-          file: "./env/${{ env.ENV_FILE }}"
+          file: "env/${{ env.ENV_FILE }}"
           replace-all: |
             NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
             NEXT_PUBLIC_ETHEREUM_RPC_URL=${{ secrets.NEXT_PUBLIC_ETHEREUM_RPC_URL }}
