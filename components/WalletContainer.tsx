@@ -53,7 +53,7 @@ const WalletContainer = () => {
           d="M17 4V1L16 0H1L0 1V13L1 14H16L17 13V10H18V4H17ZM16 1.41421L15.5858 1H1.41421L1 1.41421V12.5858L1.41421 13H15.5858L16 12.5858V10H7L6 9V5L7 4H16V1.41421ZM17 5H7.41421L7 5.41421V8.58579L7.41421 9H17V5Z"
         />
       </svg>
-      <div className="w-full pl-2 text-center text-xs" style={{ marginBottom: "-2px" }}>
+      <div className="w-full pl-2 text-center text-xs" style={{ marginBottom: "-1px" }}>
         {isConnected && address ? (ensName ? ensName.substring(0, 12) : formatHexString(address)) : "Connect"}
       </div>
     </button>
