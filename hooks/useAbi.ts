@@ -7,14 +7,15 @@ import { ADDRESS_ZERO, isAddress, isContract } from "@/utils/evm";
 import { PUB_ETHERSCAN_API_KEY } from "@/constants";
 import { useAlerts } from "@/context/Alerts";
 import { getImplementation } from "@/utils/proxies";
-import { ChainName, getChainIdTypesafe } from "@/utils/chains";
+import { ChainName, getChainIdTypesafe, useChainIdTypesafe } from "@/utils/chains";
 
 export const useAbi = (contractAddress: Address) => {
   const { addAlert } = useAlerts();
   const publicClient = usePublicClient();
+  const chainId = useChainIdTypesafe();
 
   const { data: implementationAddress, isLoading: isLoadingImpl } = useQuery<Address | null>({
-    queryKey: ["proxy-check", contractAddress, publicClient?.chain.id],
+    queryKey: ["proxy-check", contractAddress, chainId],
     queryFn: () => {
       if (!contractAddress || !publicClient) return null;
       else if (!isAddress(contractAddress) || !publicClient) {
@@ -42,7 +43,7 @@ export const useAbi = (contractAddress: Address) => {
     isLoading,
     error,
   } = useQuery<AbiFunction[], Error>({
-    queryKey: ["abi", resolvedAddress || "", publicClient?.chain.id],
+    queryKey: ["abi", resolvedAddress || "", chainId],
     queryFn: async () => {
       if (!resolvedAddress || !isAddress(resolvedAddress) || !publicClient) {
         return [];
