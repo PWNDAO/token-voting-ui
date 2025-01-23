@@ -1,3 +1,4 @@
+import { getCurrentViemChain } from "@/utils/chains";
 import { formatHexString } from "@/utils/evm";
 import { DataListItem, MemberAvatar, Tag, type TagVariant } from "@aragon/gov-ui-kit";
 import classNames from "classnames";
@@ -19,8 +20,9 @@ export interface IVotesDataListItemStructureProps {
 export const VotesDataListItemStructure: React.FC<IVotesDataListItemStructureProps> = (props) => {
   const { address, connectedAccount, delegate, ensAvatar, ensName, variant, className, votingPower, ...otherProps } =
     props;
-  const { chain } = useAccount();
-  const explorerUrl = `${chain!.blockExplorers?.default.url}/address/${address}`;
+
+  const chain = getCurrentViemChain();
+  const explorerUrl = `${chain?.blockExplorers?.default?.url}/address/${address}`;
 
   const label = connectedAccount ? "You" : delegate ? "Your delegate" : null;
 

@@ -1,19 +1,19 @@
 import { formatHexString } from "@/utils/evm";
 import { getChildrenText } from "@/utils/content";
 import { type ReactNode, useState, useEffect } from "react";
-import { usePublicClient } from "wagmi";
+import { getCurrentViemChain } from "@/utils/chains";
 // import { Link } from '@aragon/gov-ui-kit'
 
 export const TransactionText = ({ children }: { children: ReactNode }) => {
   const txHash = getChildrenText(children);
-  const client = usePublicClient();
+  const chain = getCurrentViemChain();
   const [link, setLink] = useState<string>();
 
   useEffect(() => {
-    if (!client) return;
+    if (!chain) return;
 
-    setLink(`${client.chain.blockExplorers?.default.url}/tx/${txHash}`);
-  }, [txHash, client]);
+    setLink(`${chain?.blockExplorers?.default?.url}/tx/${txHash}`);
+  }, [txHash, chain]);
 
   const formattedHexValue = formatHexString(txHash.trim());
   if (!link) {

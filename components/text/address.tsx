@@ -1,21 +1,21 @@
 import { formatHexString } from "@/utils/evm";
 import { getChildrenText } from "@/utils/content";
 import { type ReactNode, useState, useEffect } from "react";
-import { usePublicClient } from "wagmi";
+import { getCurrentViemChain } from "@/utils/chains";
 // import { Link } from '@aragon/gov-ui-kit'
 
 export const AddressText = ({ children, bold }: { children: ReactNode; bold?: boolean }) => {
   const address = getChildrenText(children);
-  const client = usePublicClient();
+  const chain = getCurrentViemChain();
   const [link, setLink] = useState<string>();
 
   const useBold = bold === undefined ? true : bold;
 
   useEffect(() => {
-    if (!client) return;
+    if (!chain) return;
 
-    setLink(`${client.chain.blockExplorers?.default.url}/address/${address}`);
-  }, [address, client]);
+    setLink(`${chain?.blockExplorers?.default?.url}/address/${address}`);
+  }, [address, chain]);
 
   const formattedAddress = formatHexString(address.trim());
   if (!link) {

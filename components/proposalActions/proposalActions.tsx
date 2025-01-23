@@ -17,7 +17,7 @@ import { Else, ElseIf, If, Then } from "../if";
 import { useAction } from "@/hooks/useAction";
 import { decodeCamelCase } from "@/utils/case";
 import { formatEther } from "viem";
-import { useAccount } from "wagmi";
+import { getCurrentViemChain } from "@/utils/chains";
 
 const DEFAULT_DESCRIPTION =
   "When the proposal passes the community vote, the following actions will be executable by the DAO.";
@@ -41,7 +41,7 @@ export const ProposalActions: React.FC<IProposalActionsProps> = (props) => {
   }
 
   return (
-    <div className="overflow-hidden  bg-neutral-0 pb-2 shadow-neutral">
+    <div className="overflow-hidden bg-neutral-0 pb-2 shadow-neutral">
       {/* Header */}
       <div className="flex flex-col gap-y-2 px-4 py-4 md:gap-y-3 md:px-6 md:py-6">
         <div className="flex justify-between gap-x-2 gap-y-2">
@@ -77,8 +77,8 @@ const ActionItem = ({ index, rawAction, onRemove }: { index: number; rawAction: 
     : decodeCamelCase(action.functionName || "(function call)");
   const functionAbi = action.functionAbi ?? null;
 
-  const { chain } = useAccount();
-  const explorerUrl = `${chain!.blockExplorers?.default.url}/address/${action.to}`;
+  const chain = getCurrentViemChain();
+  const explorerUrl = `${chain?.blockExplorers?.default?.url}/address/${action.to}`;
 
   return (
     <AccordionItem className="border-t border-t-neutral-100 bg-neutral-0" value={title}>
