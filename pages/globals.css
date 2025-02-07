@@ -296,6 +296,6 @@ nav[aria-label="Breadcrumbs"] > div.text-critical-800 {
 }
 
 .customStewardsProposalCardWrapper .bg-info-200 {
-  background-color: rgb(var(--guk-color-primary-500) / var(--tw-bg-opacity, 1)) !important; 
+  background-color: rgb(var(--guk-color-primary-50) / var(--tw-bg-opacity, 1)) !important; 
   color: rgb(var(--guk-color-primary-400) / var(--tw-text-opacity, 1)) !important;
 }
