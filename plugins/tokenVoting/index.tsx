@@ -5,7 +5,7 @@ import ProposalDetail from "./pages/proposal";
 import { useRouter } from "next/router";
 
 export function getTokenVotingSubpage(urlAsPath: string) {
-  let pluginSubPage = urlAsPath.slice("/#/community-voting".length);
+  let pluginSubPage = urlAsPath.slice("/#/stewards".length);
   if (pluginSubPage[0] === "/") {
     pluginSubPage = pluginSubPage.slice(1);
   }
